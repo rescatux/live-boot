@@ -17,27 +17,39 @@ is_live_path()
 
 matches_uuid ()
 {
-	if [ "${IGNORE_UUID}" ] || [ ! -e /conf/uuid.conf ]
+	if [ "${LIVEID}" ]
 	then
-		return 0
-	fi
+		path="${1}"
 
-	path="${1}"
-	uuid="$(cat /conf/uuid.conf)"
-
-	for try_uuid_file in "${path}/.disk/live-uuid"*
-	do
-		[ -e "${try_uuid_file}" ] || continue
-
-		try_uuid="$(cat "${try_uuid_file}")"
-
-		if [ "${uuid}" = "${try_uuid}" ]
+		if [ -e "${path}${LIVEID}" ]
+		then
+			return 0
+		else
+			return 1
+		fi
+	else
+		if [ "${IGNORE_UUID}" ] || [ ! -e /conf/uuid.conf ]
 		then
 			return 0
 		fi
-	done
 
-	return 1
+		path="${1}"
+		uuid="$(cat /conf/uuid.conf)"
+
+		for try_uuid_file in "${path}/.disk/live-uuid"*
+		do
+			[ -e "${try_uuid_file}" ] || continue
+
+			try_uuid="$(cat "${try_uuid_file}")"
+
+			if [ "${uuid}" = "${try_uuid}" ]
+			then
+				return 0
+			fi
+		done
+
+		return 1
+	fi
 }
 
 get_backing_device ()

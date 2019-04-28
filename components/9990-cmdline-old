@@ -127,6 +127,11 @@ Cmdline_old ()
 				export LIVE_MEDIA_TIMEOUT
 				;;
 
+			liveid=*)
+				LIVEID="${_PARAMETER#liveid=}"
+				export LIVEID
+				;;
+
 			module=*)
 				MODULE="${_PARAMETER#module=}"
 				export MODULE
