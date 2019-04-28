@@ -1,3 +1,10 @@
+live-boot (1:20190428) unstable; urgency=medium
+
+  [ Adrian Gibanel ]
+  * Added liveid support
+
+ -- Adrian Gibanel <adrian15sgd@gmail.com>  Sun, 28 Apr 2019 14:57:11 +0200
+
 live-boot (1:20180603) unstable; urgency=medium
 
   [ Luca Boccassi ]
